@@ -128,9 +128,20 @@ public class Main {
                             else continue;
                         }
 
+                        boolean duplicate = false;
+
                         //if comp is main then breaks loop but if it isn't then is added
                         if(diff) {
-                            System.out.println("compAsin " + compAsin + " mainAsin " + mainAsin + " boolean " + compAsin.equals(mainAsin));
+                            //System.out.println("compAsin " + compAsin + " mainAsin " + mainAsin + " boolean " + compAsin.equals(mainAsin));
+                            for(int i = 0; i < compStrParagraphList.size(); i++){
+                                if((compAsin.equals(compStrParagraphList.get(i)))){
+                                    duplicate = true;
+                                    break;
+                                }
+
+                                else
+                                    duplicate = false;
+                            }
                             if (compAsin.equals(mainAsin)) {
                                 diff1 = false;
                                 break;
@@ -141,6 +152,20 @@ public class Main {
 
                         if(same) {
                             //System.out.println("compAsin " + compAsin + " mainAsin " + mainAsin + " boolean " + compAsin.equals(mainAsin));
+                            for(int i = 0; i < compStrParagraphList.size(); i++){
+                                if(!(compAsin.equals(compStrParagraphList.get(i)))){
+                                    duplicate = true;
+                                    break;
+                                }
+
+                                else
+                                    duplicate = false;
+                            }
+
+
+                            if(duplicate)
+                                continue;
+
                             if (compAsin.equals(mainAsin)) {
                                 diff1 = true;
                                 break;
@@ -158,7 +183,21 @@ public class Main {
 
                 }
 
+
                 System.out.println("\n");
+
+                int count  = 0;
+                for(int i = 0; i < compStrParagraphList.size();i++){
+                    for(int z = 0; z < compStrParagraphList.size();z++){
+                        if(compStrParagraphList.get(i).equals(compStrParagraphList.get(z)))
+                            count++;
+
+                        if(count > 1){
+                            compStrParagraphList.remove(i);
+                            //i--;
+                        }
+                    }
+                }
 
                 if(compStrParagraphList.size() == 0)
                     System.out.println("Everything in comparing file is in main file");
